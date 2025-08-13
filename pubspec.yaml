@@ -35,27 +35,28 @@ dependencies:
   cupertino_icons: ^1.0.8
   
   # State Management
-  provider: ^6.1.1
+  # provider: ^6.1.1
   
   # HTTP & API
-  http: ^1.1.0
-  dio: ^5.4.0
+  # http: ^1.1.0
+  # dio: ^5.4.0
   
   # Dependency Injection
-  get_it: ^7.6.4
+  # get_it: ^7.6.4
   
   # Utilities
-  shared_preferences: ^2.2.2
-  connectivity_plus: ^5.0.2
+  # shared_preferences: ^2.2.2
+  # connectivity_plus: ^5.0.2
   
   # JSON & Serialization
-  json_annotation: ^4.8.1
+  # json_annotation: ^4.8.1
   
   # Error Handling
-  logger: ^2.0.2+1
+  # logger: ^2.0.2+1
   
   # Functional Programming
-  dartz: ^0.10.1
+  # dartz: ^0.10.1
+  google_fonts: ^6.3.0
 
 dev_dependencies:
   flutter_test:
@@ -100,16 +101,16 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  fonts:
-    - family: Poppins
-      fonts:
-        - asset: assets/fonts/Poppins-Regular.ttf
-        - asset: assets/fonts/Poppins-Medium.ttf
-          weight: 500
-        - asset: assets/fonts/Poppins-SemiBold.ttf
-          weight: 600
-        - asset: assets/fonts/Poppins-Bold.ttf
-          weight: 700
+  # fonts:
+  #   - family: Poppins
+  #     fonts:
+  #       - asset: assets/fonts/Poppins-Regular.ttf
+  #       - asset: assets/fonts/Poppins-Medium.ttf
+  #         weight: 500
+  #       - asset: assets/fonts/Poppins-SemiBold.ttf
+  #         weight: 600
+  #       - asset: assets/fonts/Poppins-Bold.ttf
+  #         weight: 700
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
