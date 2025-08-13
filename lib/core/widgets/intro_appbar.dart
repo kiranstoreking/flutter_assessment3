@@ -24,47 +24,60 @@ class IntroAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       automaticallyImplyLeading: false,
       toolbarHeight: 200,
-
-      backgroundColor: Colors.transparent, // gradient will cover
+      backgroundColor: Colors.transparent,
       elevation: 0,
       flexibleSpace: Container(
-        padding: EdgeInsets.symmetric(horizontal: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 8),
         decoration: const BoxDecoration(gradient: AppColors.primaryGradient),
         child: Stack(
           children: [
-            // Back button at top-left (only if not first page)
             if (currentPage != 0)
               Positioned(
                 top: MediaQuery.of(context).padding.top,
                 left: 8,
-                child: IconButton(
-                  icon: const Icon(Icons.arrow_back, color: Colors.white),
-                  onPressed: onBack ?? () => Navigator.pop(context),
+                child: Container(
+                  width: 32,
+                  height: 32,
+                  color: AppColors.white,
+                  child: Center(
+                    child: IconButton(
+                      icon: const Icon(Icons.arrow_back, color: Colors.black),
+                      onPressed: onBack ?? () => Navigator.pop(context),
+                    ),
+                  ),
                 ),
               ),
-
-            // Image at bottom
             Positioned(
-              right: 16, // move it to the right side
-              bottom: 16, // keep it near the bottom
+              right: 16,
+              bottom: 16,
               child: Image.asset(
                 AppAssets.appicon,
-                height: 176, // larger size
+                height: 176,
                 width: 170,
                 fit: BoxFit.contain,
               ),
             ),
-
-            // Text over image
             Positioned(
+              top: 150,
               left: 16,
-              bottom: 16 + 50, // leave space so it's above image
+              width: 340,
+              height: 74,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title, style: AppTextStyles.displayLarge),
-                  SizedBox(height: 10),
-                  Text(subtitle, style: AppTextStyles.titleSmall),
+                  Text(
+                    title,
+                    style: AppTextStyles.displayLarge,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    subtitle,
+                    style: AppTextStyles.titleSmall,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ],
               ),
             ),
@@ -76,8 +89,8 @@ class IntroAppBar extends StatelessWidget implements PreferredSizeWidget {
         child: LinearProgressIndicator(
           minHeight: 8,
           value: (currentPage + 1) / totalPages,
-          backgroundColor: Colors.grey[300],
-          valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
+          backgroundColor: AppColors.gray300,
+          valueColor: const AlwaysStoppedAnimation<Color>(AppColors.info),
         ),
       ),
     );

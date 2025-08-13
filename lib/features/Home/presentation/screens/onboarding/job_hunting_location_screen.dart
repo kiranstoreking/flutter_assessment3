@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_assignment3/core/theme/app_colors.dart';
+import 'package:flutter_assignment3/core/widgets/custom_button.dart';
 import 'package:flutter_assignment3/core/widgets/intro_appbar.dart';
 
 class JobHuntingScreen extends StatelessWidget {
@@ -6,14 +8,18 @@ class JobHuntingScreen extends StatelessWidget {
   final int currentPage;
   final int totalPages;
 
-  const JobHuntingScreen({super.key, this.onBack, required this.currentPage, required this.totalPages});
+  const JobHuntingScreen({
+    super.key,
+    this.onBack,
+    required this.currentPage,
+    required this.totalPages,
+  });
 
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue,
-      appBar:  IntroAppBar(
+      backgroundColor: AppColors.white,
+      appBar: IntroAppBar(
         title: "Where are you job hunting?",
         subtitle: "This helps us find amazing jobs in your preferred location.",
         currentPage: currentPage,
@@ -32,13 +38,16 @@ class JobHuntingScreen extends StatelessWidget {
             SizedBox(height: 20),
             Container(
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: AppColors.accentBlue,
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(color: Colors.blue),
               ),
               child: ListTile(
                 leading: Icon(Icons.location_on, color: Colors.blue),
-                title: Text('Current Location', style: TextStyle(color: Colors.blue)),
+                title: Text(
+                  'Current Location',
+                  style: TextStyle(color: Colors.blue),
+                ),
                 subtitle: Text('Find jobs in your current city'),
                 trailing: Icon(Icons.radio_button_checked, color: Colors.blue),
               ),
@@ -56,10 +65,18 @@ class JobHuntingScreen extends StatelessWidget {
                 fillColor: Colors.white,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide.none,
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: BorderSide(color: Colors.black),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: BorderSide(color: Colors.black, width: 2),
                 ),
               ),
             ),
+
             SizedBox(height: 20),
             Wrap(
               spacing: 8,
@@ -70,15 +87,9 @@ class JobHuntingScreen extends StatelessWidget {
               ],
             ),
             Spacer(),
-            ElevatedButton(
-              onPressed: () {
-                // Navigate to the next screen
-              },
-              child: Text('Next : Your Education'),
-              style: ElevatedButton.styleFrom(
-                minimumSize: Size(double.infinity, 50), // button height
-              ),
-            ),
+            CustomButton(text: "Next", onPressed: () {}),
+            // Padding(padding: const EdgeInsets.only(bottom: 50.0)),
+            SizedBox(height: 50),
           ],
         ),
       ),
@@ -93,9 +104,7 @@ class JobHuntingScreen extends StatelessWidget {
       child: Text(city, style: TextStyle(color: Colors.blue)),
       style: OutlinedButton.styleFrom(
         side: BorderSide(color: Colors.blue),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       ),
     );
   }

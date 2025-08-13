@@ -28,8 +28,9 @@ class _IntroScreenState extends State<IntroScreen> {
         onBack: () {
           if (_currentPage > 0) {
             _pageController.previousPage(
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.easeInOut);
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeInOut,
+            );
           }
         },
       ),
@@ -39,8 +40,9 @@ class _IntroScreenState extends State<IntroScreen> {
         onBack: () {
           if (_currentPage > 0) {
             _pageController.previousPage(
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.easeInOut);
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeInOut,
+            );
           }
         },
       ),
@@ -50,8 +52,9 @@ class _IntroScreenState extends State<IntroScreen> {
         onBack: () {
           if (_currentPage > 0) {
             _pageController.previousPage(
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.easeInOut);
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeInOut,
+            );
           }
         },
       ),
@@ -61,8 +64,9 @@ class _IntroScreenState extends State<IntroScreen> {
         onBack: () {
           if (_currentPage > 0) {
             _pageController.previousPage(
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.easeInOut);
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeInOut,
+            );
           }
         },
       ),
@@ -73,8 +77,9 @@ class _IntroScreenState extends State<IntroScreen> {
         onBack: () {
           if (_currentPage > 0) {
             _pageController.previousPage(
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.easeInOut);
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeInOut,
+            );
           }
         },
       ),
@@ -95,39 +100,6 @@ class _IntroScreenState extends State<IntroScreen> {
         itemBuilder: (context, index) {
           return slides[index];
         },
-      ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            _currentPage > 0
-                ? TextButton(
-                    onPressed: () {
-                      _pageController.previousPage(
-                          duration: Duration(milliseconds: 300),
-                          curve: Curves.easeInOut);
-                    },
-                    child: Text('Back'),
-                  )
-                : SizedBox(),
-            _currentPage < slides.length - 1
-                ? TextButton(
-                    onPressed: () {
-                      _pageController.nextPage(
-                          duration: Duration(milliseconds: 300),
-                          curve: Curves.easeInOut);
-                    },
-                    child: Text('Next'),
-                  )
-                : TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text('Done'),
-                  ),
-          ],
-        ),
       ),
     );
   }

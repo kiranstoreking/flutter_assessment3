@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_assignment3/core/constants/app_assets.dart';
 import 'package:flutter_assignment3/core/theme/app_colors.dart';
 import 'package:flutter_assignment3/core/theme/app_text_styles.dart';
+import 'package:flutter_assignment3/core/widgets/custom_button.dart';
 import 'package:flutter_assignment3/core/widgets/intro_appbar.dart';
 
 class UserInfoScreen extends StatelessWidget {
@@ -15,6 +16,31 @@ class UserInfoScreen extends StatelessWidget {
     required this.currentPage,
     required this.totalPages,
   }) : super(key: key);
+
+  // Common decoration for all text fields
+  InputDecoration _inputDecoration({
+    required String label,
+    Widget? suffixIcon,
+  }) {
+    return InputDecoration(
+      labelText: label,
+      labelStyle: AppTextStyles.titleSmall,
+      filled: true,
+      fillColor: Colors.white,
+      suffixIcon: suffixIcon,
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8), // rounded corners
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: BorderSide(color: Colors.grey.shade400),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: const BorderSide(color: Colors.grey),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,121 +58,94 @@ class UserInfoScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          // changed to scrollable in case of small screens
           children: [
-            RichText(
-              text: TextSpan(
-                children: [
-                  TextSpan(text: "First Name", style: AppTextStyles.titleSmall),
-                  TextSpan(
-                    text: "*",
-                    style: AppTextStyles.titleSmall.copyWith(
-                      color: AppColors.error,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
+            // First Name
+            _labelWithAsterisk("First Name"),
             TextField(
-              decoration: InputDecoration(
-                labelText: 'Enter your first name',
-                labelStyle: AppTextStyles.titleSmall,
-                filled: true,
-                fillColor: Colors.white,
-                border: OutlineInputBorder(),
-              ),
+              cursorColor: Colors.grey,
+              decoration: _inputDecoration(label: 'Enter your first name'),
             ),
-            SizedBox(height: 20),
-            RichText(
-              text: TextSpan(
-                children: [
-                  TextSpan(text: "First Name", style: AppTextStyles.titleSmall),
-                  TextSpan(
-                    text: "*",
-                    style: AppTextStyles.titleSmall.copyWith(
-                      color: AppColors.error,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            const SizedBox(height: 20),
 
+            // Last Name
+            _labelWithAsterisk("Last Name"),
             TextField(
-              decoration: InputDecoration(
-                labelText: 'Enter your first name',
-                labelStyle: AppTextStyles.titleSmall,
-                filled: true,
-                fillColor: Colors.white,
-                border: OutlineInputBorder(),
-              ),
+              cursorColor: Colors.grey,
+              decoration: _inputDecoration(label: 'Enter your last name'),
             ),
-            SizedBox(height: 20),
-            Text("Gender *", style: TextStyle(color: Colors.white)),
+            const SizedBox(height: 20),
+
+            // Gender
+            _labelWithAsterisk("Gender"),
+            const SizedBox(height: 8),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  child: Column(
-                    children: [Image.asset(AppAssets.maleIcon), Text('Male')],
-                  ),
-                ),
-
-                Container(
-                  child: Column(
-                    children: [Image.asset(AppAssets.femaleIcon), Text('Male')],
-                  ),
-                ),
-
-                Container(
-                  child: Column(
-                    children: [Image.asset(AppAssets.otherIcon), Text('Male')],
-                  ),
-                ),
+                _genderOption(AppAssets.maleIcon, "Male"),
+                _genderOption(AppAssets.femaleIcon, "Female"),
+                _genderOption(AppAssets.otherIcon, "Other"),
               ],
             ),
-            SizedBox(height: 20),
-            RichText(
-              text: TextSpan(
-                children: [
-                  TextSpan(
-                    text: "Date of Birth",
-                    style: AppTextStyles.titleSmall,
-                  ),
-                  TextSpan(
-                    text: "*",
-                    style: AppTextStyles.titleSmall.copyWith(
-                      color: AppColors.error,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            const SizedBox(height: 20),
 
+            // Date of Birth
+            _labelWithAsterisk("Date of Birth"),
             TextField(
-              decoration: InputDecoration(
-                labelText: 'Enter your first name',
-                labelStyle: AppTextStyles.titleSmall,
-                filled: true,
-                fillColor: Colors.white,
-                border: OutlineInputBorder(),
-              ),
-            ),
-            SizedBox(height: 30),
-            Center(
-              child: ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
-                ),
-                child: Text(
-                  "Let's Begin",
-                  style: TextStyle(color: Colors.white),
+              cursorColor: Colors.grey,
+              readOnly: true,
+              decoration: _inputDecoration(
+                label: 'Select your date of birth',
+                suffixIcon: const Icon(
+                  Icons.calendar_today,
+                  color: Colors.grey,
                 ),
               ),
+              onTap: () {
+                // TODO: Implement date picker logic here
+              },
             ),
+            Spacer(),
+
+            // Submit Button
+            CustomButton(text: "Next", onPressed: () {}),
+            // Padding(padding: const EdgeInsets.only(bottom: 50.0)),
+            SizedBox(height: 50),
           ],
         ),
       ),
+    );
+  }
+
+  /// Widget for label + red asterisk
+  Widget _labelWithAsterisk(String label) {
+    return RichText(
+      text: TextSpan(
+        children: [
+          TextSpan(
+            text: label,
+            style: AppTextStyles.titleSmall.copyWith(color: AppColors.gray700),
+          ),
+          TextSpan(
+            text: " *",
+            style: AppTextStyles.titleSmall.copyWith(color: AppColors.error),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// Gender selection option widget
+  Widget _genderOption(String iconPath, String label) {
+    return Column(
+      children: [
+        Image.asset(iconPath, height: 50, width: 50),
+        const SizedBox(height: 4),
+        Text(
+          label,
+          style: AppTextStyles.titleSmall.copyWith(color: Colors.black),
+        ),
+      ],
     );
   }
 }

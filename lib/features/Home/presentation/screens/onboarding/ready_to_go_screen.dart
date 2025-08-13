@@ -3,81 +3,71 @@ import 'package:flutter_assignment3/core/widgets/intro_appbar.dart';
 
 class WelcomeScreen extends StatelessWidget {
   final String userName;
-   final VoidCallback? onBack;
+  final VoidCallback? onBack;
   final int currentPage;
   final int totalPages;
 
-
-  WelcomeScreen({required this.userName, this.onBack, required this.currentPage, required this.totalPages});
+  WelcomeScreen({
+    required this.userName,
+    this.onBack,
+    required this.currentPage,
+    required this.totalPages,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:  IntroAppBar(
+      backgroundColor: Colors.white,
+      appBar: IntroAppBar(
         title: "You're all set!",
         subtitle: "We're already searching for jobs that match your profile.",
         currentPage: currentPage,
         totalPages: totalPages,
         onBack: onBack,
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          // Header Section
-          Container(
-            padding: EdgeInsets.all(20),
-            color: Colors.blue, // Background color for header
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.blue.shade50, Colors.white],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 32),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                // Celebration GIF
+                Image.asset(
+                  'assets/gifs/celebrate.gif',
+                  width: 180,
+                  height: 180,
+                ),
+                SizedBox(height: 24),
+
+                // Greeting Text
                 Text(
-                  "You're all set!",
+                  "Glad to have you,",
+                  style: TextStyle(fontSize: 20, color: Colors.grey.shade800),
+                ),
+                SizedBox(height: 8),
+                Text(
+                  userName,
                   style: TextStyle(
-                    fontSize: 24,
-                    color: Colors.white,
+                    fontSize: 28,
+                    color: Colors.blue,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 5),
-                Text(
-                  "We're already searching for jobs that match your profile.",
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.white,
-                  ),
-                ),
+                SizedBox(height: 32),
               ],
             ),
           ),
-
-          SizedBox(height: 50), // Space between header and content
-
-          // Celebration Icon
-          Icon(
-            Icons.party_mode, // Replace with the appropriate icon
-            size: 80,
-            color: Colors.yellow,
-          ),
-
-          SizedBox(height: 20), // Space before greeting text
-
-          // Greeting message
-          Text(
-            "Glad to have you,",
-            style: TextStyle(
-              fontSize: 20,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            userName,
-            style: TextStyle(
-              fontSize: 24,
-              color: Colors.blue,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

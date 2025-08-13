@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_assignment3/core/widgets/custom_button.dart';
 import 'package:flutter_assignment3/core/widgets/intro_appbar.dart';
 
 class SkillsScreen extends StatelessWidget {
-    final VoidCallback? onBack;
+  final VoidCallback? onBack;
   final int currentPage;
   final int totalPages;
 
-  const SkillsScreen({super.key, this.onBack, required this.currentPage, required this.totalPages});
+  const SkillsScreen({
+    super.key,
+    this.onBack,
+    required this.currentPage,
+    required this.totalPages,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:  IntroAppBar(
+      appBar: IntroAppBar(
         title: "What are you great at?",
         subtitle: "Select your top skills so the right companies can find you.",
         currentPage: currentPage,
@@ -27,10 +34,28 @@ class SkillsScreen extends StatelessWidget {
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 16),
-            TextField(
+            TextFormField(
               decoration: InputDecoration(
                 hintText: 'Search your skills',
-                border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.search),
+                filled: true,
+                fillColor: Colors.white,
+                contentPadding: EdgeInsets.symmetric(
+                  vertical: 16.0,
+                  horizontal: 16.0,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30), // Rounded border
+                  borderSide: BorderSide(color: Colors.grey.shade400),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30),
+                  borderSide: BorderSide(color: Colors.grey.shade400),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30),
+                  borderSide: BorderSide(color: Colors.blue, width: 2),
+                ),
               ),
             ),
             SizedBox(height: 16),
@@ -53,14 +78,25 @@ class SkillsScreen extends StatelessWidget {
             ),
             Expanded(child: Container()),
             SizedBox(height: 16),
-            ElevatedButton(
+            // ElevatedButton(
+            //   onPressed: () {
+            //     // Action for button
+            //   },
+            //   child: Text('Find My Matches'),
+            //   style: ElevatedButton.styleFrom(
+            //     padding: EdgeInsets.symmetric(vertical: 16),
+            //     shape: RoundedRectangleBorder(
+            //       borderRadius: BorderRadius.circular(30), // Button circular
+            //     ),
+            //   ),
+            // ),
+            CustomButton(
+              text: "Next",
               onPressed: () {
-                // Action for button
+                // Action for next button
               },
-              child: Text('Find My Matches'),
-              style: ElevatedButton.styleFrom(
-              ),
             ),
+            SizedBox(height: 50),
           ],
         ),
       ),
@@ -82,9 +118,14 @@ class SkillChip extends StatelessWidget {
       onSelected: (bool selected) {
         // Add selection logic here
       },
-      labelStyle: TextStyle(color: isSelected ? Colors.white : Colors.blue),
+      labelStyle: TextStyle(
+        color: isSelected ? Colors.white : Colors.blue,
+        fontWeight: FontWeight.w500,
+      ),
       selectedColor: Colors.blue,
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.grey.shade200,
+      shape: StadiumBorder(), // Makes chip circular
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
     );
   }
 }
