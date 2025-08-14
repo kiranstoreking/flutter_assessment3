@@ -4,176 +4,171 @@ import 'app_colors.dart';
 
 class AppTextStyles {
   // Font Family
-  static const String fontFamily = 'Poppins';
+  static const String fontFamily = 'Roboto';
 
-  // Noto Sans - Display styles
+  // Display Styles
   static final TextStyle displayLarge = GoogleFonts.notoSans(
-    fontSize: 18,
+    fontSize: 32,
     fontWeight: FontWeight.w700,
-    height: 1.0, // line-height: 100%
-    letterSpacing: 0,
+    height: 1.2,
+    letterSpacing: -0.5,
     color: AppColors.white,
   );
 
   static final TextStyle displayMedium = GoogleFonts.notoSans(
-    fontSize: 17,
-    fontWeight: FontWeight.w600, // SemiBold
-    height: 1.0, // 100% line-height
-    letterSpacing: 0,
+    fontSize: 28,
+    fontWeight: FontWeight.w600,
+    height: 1.2,
+    letterSpacing: -0.25,
     color: AppColors.white,
   );
 
   static final TextStyle displaySmall = GoogleFonts.notoSans(
-    fontSize: 14,
-    fontWeight: FontWeight.w600, // SemiBold
-    height: 1.0, // 100% line-height
+    fontSize: 18,
+    fontWeight: FontWeight.w700,
+    height: 1.2,
     letterSpacing: 0,
     color: AppColors.textPrimary,
   );
 
   // Headline Styles
-  static const TextStyle headlineLarge = TextStyle(
-    fontFamily: fontFamily,
+  static final TextStyle headlineLarge = GoogleFonts.notoSans(
     fontSize: 32,
     fontWeight: FontWeight.w600,
-    letterSpacing: 0,
+    height: 1.2,
+    letterSpacing: -0.5,
     color: AppColors.textPrimary,
   );
 
-  static const TextStyle headlineMedium = TextStyle(
-    fontFamily: fontFamily,
+  static final TextStyle headlineMedium = GoogleFonts.notoSans(
     fontSize: 28,
     fontWeight: FontWeight.w600,
-    letterSpacing: 0,
+    height: 1.2,
+    letterSpacing: -0.25,
     color: AppColors.textPrimary,
   );
 
-  static const TextStyle headlineSmall = TextStyle(
-    fontFamily: fontFamily,
-    fontSize: 24,
+  static final TextStyle headlineSmall = GoogleFonts.notoSans(
+    fontSize: 17,
     fontWeight: FontWeight.w600,
+    height: 1.2,
     letterSpacing: 0,
     color: AppColors.textPrimary,
   );
 
   // Title Styles
-  /// Large Title
-  static TextStyle titleLarge = GoogleFonts.notoSans(
-    fontWeight: FontWeight.w400,
-    fontStyle: FontStyle.normal,
-    fontSize: 20,
-    height: 28 / 20,
+  static final TextStyle titleLarge = GoogleFonts.notoSans(
+    fontSize: 22,
+    fontWeight: FontWeight.w600,
+    height: 1.3,
     letterSpacing: 0,
+    color: AppColors.textPrimary,
   );
 
-  /// Medium Title
-  static TextStyle titleMedium = GoogleFonts.notoSans(
-    fontWeight: FontWeight.w400,
-    fontStyle: FontStyle.normal,
+  static final TextStyle titleMedium = GoogleFonts.notoSans(
     fontSize: 18,
-    height: 26 / 18,
+    fontWeight: FontWeight.w500,
+    height: 1.3,
     letterSpacing: 0,
-    color: AppColors.white,
+    color: AppColors.textPrimary,
   );
 
-  /// Small Title
-  static TextStyle titleSmall = GoogleFonts.notoSans(
-    fontWeight: FontWeight.w400,
-    fontStyle: FontStyle.normal,
-    fontSize: 14,
-    height: 20 / 14,
+  static final TextStyle titleSmall = GoogleFonts.notoSans(
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
+    height: 1.3,
     letterSpacing: 0,
     color: AppColors.gray700,
   );
 
   // Body Styles
-  static const TextStyle bodyLarge = TextStyle(
-    fontFamily: fontFamily,
+  static final TextStyle bodyLarge = GoogleFonts.notoSans(
     fontSize: 16,
     fontWeight: FontWeight.w400,
-    letterSpacing: 0.5,
+    height: 1.5,
+    letterSpacing: 0.15,
     color: AppColors.textPrimary,
   );
 
-  static const TextStyle bodyMedium = TextStyle(
-    fontFamily: fontFamily,
+  static final TextStyle bodyMedium = GoogleFonts.notoSans(
     fontSize: 14,
     fontWeight: FontWeight.w400,
+    height: 1.4,
     letterSpacing: 0.25,
     color: AppColors.textPrimary,
   );
 
-  static TextStyle bodySmall = GoogleFonts.notoSans(
-    fontSize: 15,
-    fontWeight: FontWeight.w400, // Regular
-    height: 1.33, // line-height 20px / font-size 15px
-    letterSpacing: 0,
-    color: Colors.black87, // default text color
+  static final TextStyle bodySmall = GoogleFonts.notoSans(
+    fontSize: 13,
+    fontWeight: FontWeight.w400,
+    height: 1.3,
+    letterSpacing: 0.4,
+    color: AppColors.textPrimary,
   );
 
   // Label Styles
-  static TextStyle labelLarge = GoogleFonts.notoSans(
+  static final TextStyle labelLarge = GoogleFonts.notoSans(
     fontSize: 14,
-    fontWeight: FontWeight.w600, // 600 = SemiBold
-    height: 1.0, // line-height 100%
-    letterSpacing: 0,
-    color: Colors.black87,
+    fontWeight: FontWeight.w600,
+    height: 1.2,
+    letterSpacing: 0.1,
+    color: AppColors.textPrimary,
   );
 
-  static TextStyle labelSmall = GoogleFonts.notoSans(
+  static final TextStyle labelMedium = GoogleFonts.notoSans(
+    fontSize: 14,
+    fontWeight: FontWeight.w600,
+    height: 1.2,
+    letterSpacing: 0.1,
+    color: AppColors.white,
+  );
+
+  static final TextStyle labelSmall = GoogleFonts.notoSans(
     fontSize: 12,
-    fontWeight: FontWeight.w400, // Regular
-    height: 1.0, // line-height 100%
-    letterSpacing: 0,
-    color: AppColors.white, // Optional: use grey for secondary text
-  );
-
-  static TextStyle labelMedium = GoogleFonts.notoSans(
-    fontSize: 14,
-    fontWeight: FontWeight.w600, // 600 = SemiBold
-    height: 1.0, // line-height 100%
-    letterSpacing: 0,
+    fontWeight: FontWeight.w400,
+    height: 1.2,
+    letterSpacing: 0.5,
     color: AppColors.white,
   );
 
   // Button Styles
-  static const TextStyle buttonLarge = TextStyle(
-    fontFamily: fontFamily,
+  static final TextStyle buttonLarge = GoogleFonts.notoSans(
     fontSize: 16,
     fontWeight: FontWeight.w600,
+    height: 1.2,
     letterSpacing: 0.1,
     color: AppColors.white,
   );
 
-  static const TextStyle buttonMedium = TextStyle(
-    fontFamily: fontFamily,
+  static final TextStyle buttonMedium = GoogleFonts.notoSans(
     fontSize: 14,
     fontWeight: FontWeight.w600,
+    height: 1.2,
     letterSpacing: 0.1,
     color: AppColors.white,
   );
 
-  static const TextStyle buttonSmall = TextStyle(
-    fontFamily: fontFamily,
+  static final TextStyle buttonSmall = GoogleFonts.notoSans(
     fontSize: 12,
     fontWeight: FontWeight.w600,
+    height: 1.2,
     letterSpacing: 0.1,
     color: AppColors.white,
   );
 
   // Caption Styles
-  static const TextStyle caption = TextStyle(
-    fontFamily: fontFamily,
+  static final TextStyle caption = GoogleFonts.notoSans(
     fontSize: 12,
     fontWeight: FontWeight.w400,
+    height: 1.3,
     letterSpacing: 0.4,
     color: AppColors.textSecondary,
   );
 
-  static const TextStyle overline = TextStyle(
-    fontFamily: fontFamily,
+  static final TextStyle overline = GoogleFonts.notoSans(
     fontSize: 10,
     fontWeight: FontWeight.w400,
+    height: 1.2,
     letterSpacing: 1.5,
     color: AppColors.textSecondary,
   );

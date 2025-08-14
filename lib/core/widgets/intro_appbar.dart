@@ -23,58 +23,75 @@ class IntroAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
-      toolbarHeight: 200,
+      toolbarHeight: 220,
       backgroundColor: Colors.transparent,
       elevation: 0,
       flexibleSpace: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
         decoration: const BoxDecoration(gradient: AppColors.primaryGradient),
         child: Stack(
+          clipBehavior: Clip.none,
           children: [
+            // Decorative background app icon
+            Positioned(
+              right: -20,
+              bottom: 0,
+              child: Opacity(
+                opacity: 0.15,
+                child: Image.asset(
+                  AppAssets.appicon,
+                  height: 200,
+                  width: 200,
+                  fit: BoxFit.contain,
+                ),
+              ),
+            ),
+
+            // Back button - rounded square
             if (currentPage != 0)
               Positioned(
-                top: MediaQuery.of(context).padding.top,
-                left: 8,
-                child: Container(
-                  width: 32,
-                  height: 32,
-                  color: AppColors.white,
-                  child: Center(
-                    child: IconButton(
-                      icon: const Icon(Icons.arrow_back, color: Colors.black),
-                      onPressed: onBack ?? () => Navigator.pop(context),
+                top: MediaQuery.of(context).padding.top + 8,
+                left: 16,
+                child: Material(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8),
+                  elevation: 3,
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(8),
+                    onTap: onBack ?? () => Navigator.pop(context),
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Icon(
+                        Icons.arrow_back,
+                        color: Colors.black,
+                        size: 20,
+                      ),
                     ),
                   ),
                 ),
               ),
+
+            // Title & Subtitle
             Positioned(
-              right: 16,
-              bottom: 16,
-              child: Image.asset(
-                AppAssets.appicon,
-                height: 176,
-                width: 170,
-                fit: BoxFit.contain,
-              ),
-            ),
-            Positioned(
-              top: 150,
               left: 16,
-              width: 340,
-              height: 74,
+              right: 16,
+              bottom: 24,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     title,
-                    style: AppTextStyles.displayLarge,
-                    maxLines: 1,
+                    style: AppTextStyles.displaySmall.copyWith(
+                      color: Colors.white,
+                    ),
+                    maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 8),
                   Text(
                     subtitle,
-                    style: AppTextStyles.titleSmall,
+                    style: AppTextStyles.bodyMedium.copyWith(
+                      color: Colors.white70,
+                    ),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -84,18 +101,38 @@ class IntroAppBar extends StatelessWidget implements PreferredSizeWidget {
           ],
         ),
       ),
+
+      // Progress bar - only right end curved
       bottom: PreferredSize(
         preferredSize: const Size.fromHeight(8),
-        child: LinearProgressIndicator(
-          minHeight: 8,
-          value: (currentPage + 1) / totalPages,
-          backgroundColor: AppColors.gray600,
-          valueColor: const AlwaysStoppedAnimation<Color>(AppColors.info),
+        child: Stack(
+          children: [
+            Container(height: 8, color: Colors.white24),
+            LayoutBuilder(
+              builder: (context, constraints) {
+                double progressWidth =
+                    constraints.maxWidth * ((currentPage + 1) / totalPages);
+                return Align(
+                  alignment: Alignment.centerLeft,
+                  child: Container(
+                    height: 8,
+                    width: progressWidth,
+                    decoration: BoxDecoration(
+                      color: AppColors.info,
+                      borderRadius: const BorderRadius.horizontal(
+                        right: Radius.circular(8),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ],
         ),
       ),
     );
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(208);
+  Size get preferredSize => const Size.fromHeight(228);
 }

@@ -33,4 +33,11 @@ class AppAssets {
   static const String leftshiftArrow = '$_iconsPath/right_shift.png';
   static const String projects = '$_iconsPath/projects.png';
   static const String awardsAndCertification = '$_iconsPath/awards.png';
+  static const String profileImage = '$_iconsPath/profile.jpg';
+  static const String diploma = '$_iconsPath/diploma.png';
+  static const String graduate = '$_iconsPath/graduate.png';
+  static const String postGraduate = '$_iconsPath/post_graduate.png';
+  static const String professionalCourse =
+      '$_iconsPath/professional_course.png';
+  static const String school = '$_iconsPath/school.png';
 }

@@ -34,7 +34,8 @@ class _IntroScreenState extends State<IntroScreen> {
           }
         },
       ),
-      JobHuntingScreen(
+
+      EducationalBackgroundScreen(
         currentPage: 1,
         totalPages: 5,
         onBack: () {
@@ -46,7 +47,7 @@ class _IntroScreenState extends State<IntroScreen> {
           }
         },
       ),
-      EducationalBackgroundScreen(
+      JobHuntingScreen(
         currentPage: 2,
         totalPages: 5,
         onBack: () {

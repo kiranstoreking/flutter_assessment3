@@ -10,6 +10,10 @@ class UserInfoScreen extends StatelessWidget {
   final int currentPage;
   final int totalPages;
 
+  static const double _screenPadding = 16.0;
+  static const double _fieldSpacing = 20.0;
+  static const double _labelSpacing = 8.0;
+
   const UserInfoScreen({
     Key? key,
     this.onBack,
@@ -17,7 +21,6 @@ class UserInfoScreen extends StatelessWidget {
     required this.totalPages,
   }) : super(key: key);
 
-  // Common decoration for all text fields
   InputDecoration _inputDecoration({
     required String label,
     Widget? suffixIcon,
@@ -28,16 +31,15 @@ class UserInfoScreen extends StatelessWidget {
       filled: true,
       fillColor: Colors.white,
       suffixIcon: suffixIcon,
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8), // rounded corners
-      ),
+      contentPadding: const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide(color: Colors.grey.shade400),
+        borderRadius: BorderRadius.circular(12),
+        borderSide: BorderSide(color: Colors.grey.shade300),
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8),
-        borderSide: const BorderSide(color: Colors.grey),
+        borderRadius: BorderRadius.circular(12),
+        borderSide: const BorderSide(color: AppColors.primary, width: 1.5),
       ),
     );
   }
@@ -54,70 +56,90 @@ class UserInfoScreen extends StatelessWidget {
         totalPages: totalPages,
         onBack: onBack,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(_screenPadding),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          // changed to scrollable in case of small screens
           children: [
-            // First Name
-            _labelWithAsterisk("First Name"),
-            TextField(
-              cursorColor: Colors.grey,
-              decoration: _inputDecoration(label: 'Enter your first name'),
-            ),
-            const SizedBox(height: 20),
+            _buildCard(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _labelWithAsterisk("First Name"),
+                  const SizedBox(height: _labelSpacing),
+                  TextField(
+                    cursorColor: Colors.grey,
+                    decoration: _inputDecoration(
+                      label: 'Enter your first name',
+                    ),
+                  ),
+                  const SizedBox(height: _fieldSpacing),
 
-            // Last Name
-            _labelWithAsterisk("Last Name"),
-            TextField(
-              cursorColor: Colors.grey,
-              decoration: _inputDecoration(label: 'Enter your last name'),
-            ),
-            const SizedBox(height: 20),
+                  _labelWithAsterisk("Last Name"),
+                  const SizedBox(height: _labelSpacing),
+                  TextField(
+                    cursorColor: Colors.grey,
+                    decoration: _inputDecoration(label: 'Enter your last name'),
+                  ),
+                  const SizedBox(height: _fieldSpacing),
 
-            // Gender
-            _labelWithAsterisk("Gender"),
-            const SizedBox(height: 8),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                _genderOption(AppAssets.maleIcon, "Male"),
-                _genderOption(AppAssets.femaleIcon, "Female"),
-                _genderOption(AppAssets.otherIcon, "Other"),
-              ],
-            ),
-            const SizedBox(height: 20),
+                  _labelWithAsterisk("Gender"),
+                  const SizedBox(height: _labelSpacing),
+                  Row(
+                    children: [
+                      _genderOption(AppAssets.maleIcon, "Male"),
+                      _genderOption(AppAssets.femaleIcon, "Female"),
+                      _genderOption(AppAssets.otherIcon, "Other"),
+                    ],
+                  ),
+                  const SizedBox(height: _fieldSpacing),
 
-            // Date of Birth
-            _labelWithAsterisk("Date of Birth"),
-            TextField(
-              cursorColor: Colors.grey,
-              readOnly: true,
-              decoration: _inputDecoration(
-                label: 'Select your date of birth',
-                suffixIcon: const Icon(
-                  Icons.calendar_today,
-                  color: Colors.grey,
-                ),
+                  _labelWithAsterisk("Date of Birth"),
+                  const SizedBox(height: _labelSpacing),
+                  TextField(
+                    cursorColor: Colors.grey,
+                    readOnly: true,
+                    decoration: _inputDecoration(
+                      label: 'Select your date of birth',
+                      suffixIcon: const Icon(
+                        Icons.calendar_today,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    onTap: () {
+                      // TODO: Implement date picker
+                    },
+                  ),
+                ],
               ),
-              onTap: () {
-                // TODO: Implement date picker logic here
-              },
             ),
-            Spacer(),
-
-            // Submit Button
-            CustomButton(text: "Next", onPressed: () {}),
-            // Padding(padding: const EdgeInsets.only(bottom: 50.0)),
-            SizedBox(height: 50),
+            const SizedBox(height: 40),
+            CustomButton(text: "Let’s Begin", onPressed: () {}),
+            const SizedBox(height: 30),
           ],
         ),
       ),
     );
   }
 
-  /// Widget for label + red asterisk
+  Widget _buildCard({required Widget child}) {
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 8,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
+      padding: const EdgeInsets.all(_screenPadding),
+      child: child,
+    );
+  }
+
   Widget _labelWithAsterisk(String label) {
     return RichText(
       text: TextSpan(
@@ -135,17 +157,34 @@ class UserInfoScreen extends StatelessWidget {
     );
   }
 
-  /// Gender selection option widget
   Widget _genderOption(String iconPath, String label) {
-    return Column(
-      children: [
-        Image.asset(iconPath, height: 50, width: 50),
-        const SizedBox(height: 4),
-        Text(
-          label,
-          style: AppTextStyles.titleSmall.copyWith(color: Colors.black),
+    return Expanded(
+      child: GestureDetector(
+        onTap: () {
+          // TODO: Handle gender selection
+        },
+        child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 4),
+          padding: const EdgeInsets.symmetric(vertical: 12),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: Colors.grey.shade300),
+          ),
+          child: Column(
+            children: [
+              Image.asset(iconPath, height: 24, width: 24),
+              const SizedBox(height: 6),
+              Text(
+                label,
+                style: AppTextStyles.titleSmall.copyWith(
+                  color: AppColors.gray700,
+                ),
+              ),
+            ],
+          ),
         ),
-      ],
+      ),
     );
   }
 }

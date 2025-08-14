@@ -5,7 +5,7 @@ class EducationalOption extends StatelessWidget {
   final String title;
   final String subtitle;
   final bool isSelected;
-  final IconData icon;
+  final String imagePaths;
   final ValueChanged<bool?>? onChanged;
 
   const EducationalOption({
@@ -13,7 +13,7 @@ class EducationalOption extends StatelessWidget {
     required this.title,
     required this.subtitle,
     this.isSelected = false,
-    required this.icon,
+    required this.imagePaths,
     this.onChanged,
   }) : super(key: key);
 
@@ -31,7 +31,23 @@ class EducationalOption extends StatelessWidget {
         color: isSelected ? Colors.blue.withOpacity(0.1) : Colors.white,
       ),
       child: ListTile(
-        leading: Icon(icon, color: isSelected ? Colors.blue : Colors.grey),
+        leading: Container(
+          height: 50,
+          width: 50,
+          decoration: BoxDecoration(
+            color: AppColors.accentBlue, // light background
+            borderRadius: BorderRadius.circular(8), // square with rounded edges
+          ),
+          child: Center(
+            child: Image.asset(
+              imagePaths,
+              height: 28,
+              width: 28,
+              fit: BoxFit.contain,
+            ),
+          ),
+        ),
+
         title: Text(
           title,
           style: TextStyle(

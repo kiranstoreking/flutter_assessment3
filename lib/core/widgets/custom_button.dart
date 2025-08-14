@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_assignment3/core/constants/app_assets.dart';
 import 'package:flutter_assignment3/core/theme/app_colors.dart';
+import 'package:flutter_assignment3/core/theme/app_text_styles.dart';
 
 class CustomButton extends StatelessWidget {
   final String text;
@@ -43,18 +44,22 @@ class CustomButton extends StatelessWidget {
               children: [
                 Text(
                   text,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    color: Colors.white,
+                  style: AppTextStyles.bodyLarge.copyWith(
+                    color: AppColors.white,
                     fontWeight: FontWeight.w600,
                   ),
+                  //  const TextStyle(
+                  //   fontSize: 16,
+                  //   color: Colors.white,
+                  //   fontWeight: FontWeight.w600,
+                  // ),
                 ),
                 const SizedBox(width: 8),
 
                 Image.asset(
                   AppAssets.rightArrowIcon,
-                  height: 30,
-                  width: 30,
+                  height: 16,
+                  width: 16,
                   color: Colors.white, // makes icon white
                 ),
               ],
