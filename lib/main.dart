@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_assignment3/features/Home/presentation/screens/home/edit_profile_screen.dart';
+import 'package:flutter_assignment3/features/Home/presentation/screens/home/profile_screen.dart';
 import 'package:flutter_assignment3/features/Home/presentation/screens/onboarding/onboard_screens.dart';
+import 'package:flutter_assignment3/screen2.dart';
+
 void main() async {
-    runApp(const MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -16,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: IntroScreen()
+      home: EditProfileScreen(),
     );
   }
 }

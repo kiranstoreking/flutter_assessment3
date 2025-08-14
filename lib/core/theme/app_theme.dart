@@ -79,7 +79,7 @@ class AppTheme {
       // Input Decoration Theme
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: AppColors.gray50,
+        fillColor: AppColors.gray600,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
           borderSide: const BorderSide(color: AppColors.border),
@@ -166,8 +166,8 @@ class AppTheme {
         primaryContainer: AppColors.primary,
         secondary: AppColors.secondaryLight,
         secondaryContainer: AppColors.secondary,
-        surface: AppColors.gray800,
-        background: AppColors.gray900,
+        surface: AppColors.gray600,
+        background: AppColors.gray600,
         error: AppColors.error,
         onPrimary: AppColors.white,
         onSecondary: AppColors.white,
@@ -178,7 +178,7 @@ class AppTheme {
 
       // App Bar Theme
       appBarTheme: AppBarTheme(
-        backgroundColor: AppColors.gray800,
+        backgroundColor: AppColors.gray600,
         foregroundColor: AppColors.white,
         elevation: 0,
         centerTitle: true,
@@ -188,7 +188,7 @@ class AppTheme {
 
       // Card Theme
       cardTheme: CardThemeData(
-        color: AppColors.gray800,
+        color: AppColors.gray600,
         elevation: 2,
         shadowColor: AppColors.shadowDark,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -229,7 +229,7 @@ class AppTheme {
       // Input Decoration Theme
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: AppColors.gray800,
+        fillColor: AppColors.gray600,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
           borderSide: const BorderSide(color: AppColors.gray600),
@@ -251,9 +251,9 @@ class AppTheme {
           vertical: 12,
         ),
         labelStyle: AppTextStyles.labelMedium.copyWith(
-          color: AppColors.gray300,
+          color: AppColors.gray600,
         ),
-        hintStyle: AppTextStyles.bodyMedium.copyWith(color: AppColors.gray500),
+        hintStyle: AppTextStyles.bodyMedium.copyWith(color: AppColors.gray600),
       ),
 
       // Text Theme
@@ -287,9 +287,9 @@ class AppTheme {
 
       // Bottom Navigation Bar Theme
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        backgroundColor: AppColors.gray800,
+        backgroundColor: AppColors.gray600,
         selectedItemColor: AppColors.primaryLight,
-        unselectedItemColor: AppColors.gray400,
+        unselectedItemColor: AppColors.gray700,
         type: BottomNavigationBarType.fixed,
         elevation: 8,
       ),

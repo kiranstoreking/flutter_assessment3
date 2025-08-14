@@ -103,37 +103,37 @@ class AppTextStyles {
     color: AppColors.textPrimary,
   );
 
-  static const TextStyle bodySmall = TextStyle(
-    fontFamily: fontFamily,
-    fontSize: 12,
-    fontWeight: FontWeight.w400,
-    letterSpacing: 0.4,
-    color: AppColors.textPrimary,
+  static TextStyle bodySmall = GoogleFonts.notoSans(
+    fontSize: 15,
+    fontWeight: FontWeight.w400, // Regular
+    height: 1.33, // line-height 20px / font-size 15px
+    letterSpacing: 0,
+    color: Colors.black87, // default text color
   );
 
   // Label Styles
-  static const TextStyle labelLarge = TextStyle(
-    fontFamily: fontFamily,
+  static TextStyle labelLarge = GoogleFonts.notoSans(
     fontSize: 14,
-    fontWeight: FontWeight.w500,
-    letterSpacing: 0.1,
-    color: AppColors.textPrimary,
+    fontWeight: FontWeight.w600, // 600 = SemiBold
+    height: 1.0, // line-height 100%
+    letterSpacing: 0,
+    color: Colors.black87,
   );
 
-  static const TextStyle labelMedium = TextStyle(
-    fontFamily: fontFamily,
+  static TextStyle labelSmall = GoogleFonts.notoSans(
     fontSize: 12,
-    fontWeight: FontWeight.w500,
-    letterSpacing: 0.5,
-    color: AppColors.textPrimary,
+    fontWeight: FontWeight.w400, // Regular
+    height: 1.0, // line-height 100%
+    letterSpacing: 0,
+    color: AppColors.white, // Optional: use grey for secondary text
   );
 
-  static const TextStyle labelSmall = TextStyle(
-    fontFamily: fontFamily,
-    fontSize: 11,
-    fontWeight: FontWeight.w500,
-    letterSpacing: 0.5,
-    color: AppColors.textPrimary,
+  static TextStyle labelMedium = GoogleFonts.notoSans(
+    fontSize: 14,
+    fontWeight: FontWeight.w600, // 600 = SemiBold
+    height: 1.0, // line-height 100%
+    letterSpacing: 0,
+    color: AppColors.white,
   );
 
   // Button Styles

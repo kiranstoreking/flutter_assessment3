@@ -89,7 +89,7 @@ class IntroAppBar extends StatelessWidget implements PreferredSizeWidget {
         child: LinearProgressIndicator(
           minHeight: 8,
           value: (currentPage + 1) / totalPages,
-          backgroundColor: AppColors.gray300,
+          backgroundColor: AppColors.gray600,
           valueColor: const AlwaysStoppedAnimation<Color>(AppColors.info),
         ),
       ),

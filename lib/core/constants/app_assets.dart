@@ -29,4 +29,8 @@ class AppAssets {
   static const String userRoundIcon = '$_iconsPath/user_round.png';
   static const String userRoundCogIcon = '$_iconsPath/user_round_cog.png';
   static const String webinarsIcon = '$_iconsPath/webinars.png';
+  static const String skillsIocns = '$_iconsPath/skills.png';
+  static const String leftshiftArrow = '$_iconsPath/right_shift.png';
+  static const String projects = '$_iconsPath/projects.png';
+  static const String awardsAndCertification = '$_iconsPath/awards.png';
 }
