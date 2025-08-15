@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
           title: 'Job Search App',
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
-          home: ProfilePage(),
+          home: IntroScreen(),
         );
       },
     );

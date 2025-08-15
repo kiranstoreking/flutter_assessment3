@@ -320,6 +320,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
         totalPages: widget.totalPages,
         onBack: widget.onBack,
       ),
+      resizeToAvoidBottomInset: false, // important
       body: Padding(
         padding: 16.allPadding,
         child: Column(

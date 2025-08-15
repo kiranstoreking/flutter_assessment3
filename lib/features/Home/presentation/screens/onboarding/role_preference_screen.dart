@@ -150,7 +150,7 @@ class SkillsScreen extends StatelessWidget {
         onBack: onBack,
       ),
       body: Padding(
-        padding: 15.symmetricPadding(),
+        padding: 15.allPadding,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

@@ -1,7 +1,7 @@
 // import 'dart:math';
-// import 'dart:ui';
 // import 'package:flutter/material.dart';
 // import 'package:flutter_assignment3/core/constants/app_assets.dart';
+// import 'package:flutter_assignment3/core/constants/app_sizes.dart';
 // import 'package:flutter_assignment3/core/theme/app_colors.dart';
 // import 'package:flutter_assignment3/core/theme/app_text_styles.dart';
 // import 'package:flutter_assignment3/core/widgets/intro_appbar.dart';
@@ -52,7 +52,7 @@
 //     }
 //     path.close();
 
-//     canvas.drawShadow(path, Colors.yellowAccent, 2, true);
+//     canvas.drawShadow(path, Colors.yellowAccent, 2.rw, true);
 //     canvas.drawPath(path, paint);
 //   }
 
@@ -83,7 +83,6 @@
 //   late AnimationController _animationController;
 //   late AnimationController _textController;
 //   late AnimationController _sparkleController;
-
 //   final Random _random = Random();
 
 //   @override
@@ -114,19 +113,18 @@
 //     super.dispose();
 //   }
 
-//   // Floating stars
 //   List<Widget> _buildStars() {
 //     return List.generate(12, (index) {
 //       final left = _random.nextDouble() * MediaQuery.of(context).size.width;
-//       final top = _random.nextDouble() * 300;
-//       final size = _random.nextDouble() * 10 + 4;
+//       final top = _random.nextDouble() * 300.rh;
+//       final size = (_random.nextDouble() * 10 + 4).rw;
 
 //       return AnimatedBuilder(
 //         animation: _sparkleController,
 //         builder: (context, child) {
 //           return Positioned(
 //             left: left,
-//             top: top + 10 * sin(_sparkleController.value * 2 * pi),
+//             top: top + 10.rh * sin(_sparkleController.value * 2 * pi),
 //             child: Star(size: size, color: Colors.red.withOpacity(0.9)),
 //           );
 //         },
@@ -147,9 +145,6 @@
 //       ),
 //       body: Stack(
 //         children: [
-//           // Background gradient
-//           Container(width: double.infinity, height: double.infinity),
-
 //           // Floating stars
 //           ..._buildStars(),
 
@@ -157,10 +152,7 @@
 //           Center(
 //             child: SingleChildScrollView(
 //               child: Padding(
-//                 padding: const EdgeInsets.symmetric(
-//                   horizontal: 24,
-//                   vertical: 32,
-//                 ),
+//                 padding: 24.symmetricPadding(vertical: 32),
 //                 child: Column(
 //                   mainAxisAlignment: MainAxisAlignment.center,
 //                   children: [
@@ -168,7 +160,6 @@
 //                     Stack(
 //                       alignment: Alignment.center,
 //                       children: [
-//                         // Bottom Lottie (larger)
 //                         RotationTransition(
 //                           turns: Tween<double>(begin: 0, end: 0.05).animate(
 //                             CurvedAnimation(
@@ -186,11 +177,11 @@
 //                             child: Lottie.asset(
 //                               AppAssets.celebrate,
 //                               repeat: true,
+//                               height: 200.rh,
+//                               width: 200.rw,
 //                             ),
 //                           ),
 //                         ),
-
-//                         // Top Lottie (smaller)
 //                         RotationTransition(
 //                           turns: Tween<double>(begin: 0, end: -0.03).animate(
 //                             CurvedAnimation(
@@ -209,12 +200,14 @@
 //                             child: Lottie.asset(
 //                               AppAssets.celebrate1,
 //                               repeat: true,
+//                               height: 150.rh,
+//                               width: 150.rw,
 //                             ),
 //                           ),
 //                         ),
 //                       ],
 //                     ),
-//                     const SizedBox(height: 48),
+//                     48.vSpace,
 
 //                     // Animated Text
 //                     ScaleTransition(
@@ -242,20 +235,18 @@
 //                               Text(
 //                                 "Glad to have you,",
 //                                 style: AppTextStyles.displayMedium.copyWith(
-//                                   fontSize: 24,
+//                                   fontSize: 24.sp,
 //                                   color: AppColors.gray800,
 //                                   fontWeight: FontWeight.bold,
-//                                   shadows: [],
 //                                 ),
 //                               ),
-//                               const SizedBox(height: 12),
+//                               12.vSpace,
 //                               Text(
 //                                 widget.userName,
 //                                 style: AppTextStyles.displaySmall.copyWith(
-//                                   fontSize: 24,
+//                                   fontSize: 24.sp,
 //                                   color: AppColors.secondary,
 //                                   fontWeight: FontWeight.bold,
-//                                   shadows: [],
 //                                 ),
 //                               ),
 //                             ],
@@ -263,7 +254,7 @@
 //                         ),
 //                       ),
 //                     ),
-//                     const SizedBox(height: 64),
+//                     64.vSpace,
 //                   ],
 //                 ),
 //               ),
@@ -282,6 +273,7 @@ import 'package:flutter_assignment3/core/constants/app_sizes.dart';
 import 'package:flutter_assignment3/core/theme/app_colors.dart';
 import 'package:flutter_assignment3/core/theme/app_text_styles.dart';
 import 'package:flutter_assignment3/core/widgets/intro_appbar.dart';
+import 'package:flutter_assignment3/features/Home/presentation/screens/home/profile_screen.dart';
 import 'package:lottie/lottie.dart';
 
 // Star Widget
@@ -329,7 +321,7 @@ class _StarPainter extends CustomPainter {
     }
     path.close();
 
-    canvas.drawShadow(path, Colors.yellowAccent, 2.rw, true);
+    canvas.drawShadow(path, Colors.yellowAccent, 2.0, true);
     canvas.drawPath(path, paint);
   }
 
@@ -380,6 +372,23 @@ class _WelcomeScreenState extends State<WelcomeScreen>
       vsync: this,
       duration: const Duration(seconds: 4),
     )..repeat(reverse: true);
+
+    // Automatically navigate to ProfileScreen after 2 seconds
+    Future.delayed(const Duration(seconds: 2), () {
+      if (mounted) {
+        Navigator.of(context).pushReplacement(
+          PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                const ProfilePage(),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+                  return FadeTransition(opacity: animation, child: child);
+                },
+            transitionDuration: const Duration(milliseconds: 800),
+          ),
+        );
+      }
+    });
   }
 
   @override

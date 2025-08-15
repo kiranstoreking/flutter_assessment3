@@ -59,8 +59,8 @@ class Chips extends StatelessWidget {
   const Chips({
     required this.label,
     this.isSelected = false,
-    this.horizontalPadding = 20, // default value
-    this.verticalPadding = 12, // default value
+    this.horizontalPadding = 8, // default value
+    this.verticalPadding = 5, // default value
     Key? key,
   }) : super(key: key);
 

@@ -243,14 +243,25 @@ class ProfilePage extends StatelessWidget {
   Widget _buildGeneralSection(BuildContext context) {
     return Column(
       children: [
-        _tileItem('Account settings', AppAssets.userRoundCogIcon),
         InkWell(
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (_) => EditProfileScreen()),
+              PageRouteBuilder(
+                pageBuilder: (context, animation, secondaryAnimation) =>
+                    EditProfileScreen(),
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) {
+                      return FadeTransition(opacity: animation, child: child);
+                    },
+                transitionDuration: const Duration(milliseconds: 500),
+              ),
             );
           },
+          child: _tileItem('Account settings', AppAssets.userRoundCogIcon),
+        ),
+        InkWell(
+          onTap: () {},
           child: _tileItem('Help & Feedback', AppAssets.infoIcon),
         ),
       ],
