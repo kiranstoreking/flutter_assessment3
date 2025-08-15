@@ -1,31 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_assignment3/core/constants/app_assets.dart';
+import 'package:flutter_assignment3/core/constants/app_sizes.dart';
 import 'package:flutter_assignment3/core/theme/app_colors.dart';
 import 'package:flutter_assignment3/core/theme/app_text_styles.dart';
 import 'package:flutter_assignment3/core/widgets/custom_button.dart';
 import 'package:flutter_assignment3/features/Home/presentation/screens/home/edit_profile_screen.dart';
 
 class ProfilePage extends StatelessWidget {
+  const ProfilePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
       body: SafeArea(
         child: ListView(
-          padding: const EdgeInsets.all(16.0),
+          padding: EdgeInsets.all(16.rw),
           children: [
             _buildUserInfo(),
-            SizedBox(height: 20),
+            20.vSpace,
             _sectionWrapper(_buildSkillsSection()),
-            SizedBox(height: 20),
+            20.vSpace,
             _sectionWrapper(_buildResumeSection()),
-            SizedBox(height: 20),
+            20.vSpace,
             _sectionTitle("My Activity"),
             _sectionWrapper(_buildActivitySection()),
-            SizedBox(height: 20),
+            20.vSpace,
             _sectionTitle("General"),
             _sectionWrapper(_buildGeneralSection(context)),
-            SizedBox(height: 20),
+            20.vSpace,
             CustomButton(onPressed: () {}, text: "Logout"),
           ],
         ),
@@ -33,25 +36,26 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  // Section Title
   Widget _sectionTitle(String title) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 4),
-      child: Text(title, style: AppTextStyles.bodyLarge),
+      padding: EdgeInsets.symmetric(horizontal: 4.rw, vertical: 4.rh),
+      child: Text(
+        title,
+        style: AppTextStyles.bodyLarge.copyWith(fontSize: 16.sp),
+      ),
     );
   }
 
-  // Wrapper to give uniform style to each section
   Widget _sectionWrapper(Widget child) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(12.rw),
         color: Colors.white,
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.04),
-            blurRadius: 8,
-            offset: Offset(0, 4),
+            blurRadius: 8.rw,
+            offset: Offset(0, 4.rh),
           ),
         ],
         border: Border.all(color: Colors.grey.shade200),
@@ -60,7 +64,6 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  // User Info Section
   Widget _buildUserInfo() {
     return Container(
       decoration: BoxDecoration(
@@ -74,44 +77,52 @@ class ProfilePage extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(12.rw),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.1),
-            blurRadius: 10,
-            offset: Offset(0, 5),
+            blurRadius: 10.rw,
+            offset: Offset(0, 5.rh),
           ),
         ],
       ),
-      padding: const EdgeInsets.all(16.0),
+      padding: EdgeInsets.all(16.rw),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Shubham Jaiswal', style: AppTextStyles.labelMedium),
-              Icon(Icons.arrow_forward_ios, color: Colors.white, size: 16),
+              Text(
+                'Shubham Jaiswal',
+                style: AppTextStyles.labelMedium.copyWith(fontSize: 18.sp),
+              ),
+              Icon(Icons.arrow_forward_ios, color: Colors.white, size: 16.rw),
             ],
           ),
-          SizedBox(height: 6),
+          6.vSpace,
           Text(
             'CNC Programmer • Bengaluru • 2yr Exp',
-            style: AppTextStyles.labelSmall,
+            style: AppTextStyles.labelSmall.copyWith(fontSize: 14.sp),
           ),
-          SizedBox(height: 15),
-          Text('+919434789344', style: AppTextStyles.labelSmall),
-          SizedBox(height: 6),
-          Text('shubham1004@gmail.com', style: AppTextStyles.labelSmall),
+          15.vSpace,
+          Text(
+            '+919434789344',
+            style: AppTextStyles.labelSmall.copyWith(fontSize: 14.sp),
+          ),
+          6.vSpace,
+          Text(
+            'shubham1004@gmail.com',
+            style: AppTextStyles.labelSmall.copyWith(fontSize: 14.sp),
+          ),
         ],
       ),
     );
   }
 
-  // Skills Section
   Widget _buildSkillsSection() {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: EdgeInsets.all(16.rw),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -121,33 +132,40 @@ class ProfilePage extends StatelessWidget {
               Row(
                 children: [
                   _iconBox(AppAssets.skillsIocns),
-                  SizedBox(width: 10),
+                  10.hSpace,
                   RichText(
                     text: TextSpan(
                       children: [
                         TextSpan(
                           text: 'My Skill ',
                           style: AppTextStyles.bodySmall.copyWith(
+                            fontSize: 14.sp,
                             color: AppColors.primary,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
                         TextSpan(
                           text: 'Collection',
-                          style: AppTextStyles.bodySmall,
+                          style: AppTextStyles.bodySmall.copyWith(
+                            fontSize: 14.sp,
+                          ),
                         ),
                       ],
                     ),
                   ),
                 ],
               ),
-              Icon(Icons.arrow_forward_ios, size: 14, color: AppColors.primary),
+              Icon(
+                Icons.arrow_forward_ios,
+                size: 14.rw,
+                color: AppColors.primary,
+              ),
             ],
           ),
-          SizedBox(height: 8),
+          8.vSpace,
           Wrap(
-            spacing: 8.0,
-            runSpacing: 8.0,
+            spacing: 8.rw,
+            runSpacing: 8.rh,
             children: [
               _skillChip('UI/UX Design'),
               _skillChip('Fullstack Developer'),
@@ -164,29 +182,28 @@ class ProfilePage extends StatelessWidget {
 
   Widget _skillChip(String label) {
     return Chip(
-      label: Text(label),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+      label: Text(label, style: TextStyle(fontSize: 12.sp)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.rw)),
       backgroundColor: Colors.blue.shade100,
     );
   }
 
   Widget _iconBox(String assetPath) {
     return Container(
-      height: 44,
-      width: 44,
+      height: 44.rw,
+      width: 44.rw,
       decoration: BoxDecoration(
         color: AppColors.info.withOpacity(0.15),
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(8.rw),
       ),
-      padding: EdgeInsets.all(8),
+      padding: EdgeInsets.all(8.rw),
       child: Image.asset(assetPath, fit: BoxFit.contain),
     );
   }
 
-  // Resume Section
   Widget _buildResumeSection() {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: EdgeInsets.all(16.rw),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -195,10 +212,13 @@ class ProfilePage extends StatelessWidget {
             children: [
               Text(
                 'ATS Compliant Resume',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 4),
-              Text('Our AI will help you create one ✚'),
+              4.vSpace,
+              Text(
+                'Our AI will help you create one ✚',
+                style: TextStyle(fontSize: 14.sp),
+              ),
             ],
           ),
           _iconBox(AppAssets.resumeIcon),
@@ -207,7 +227,6 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  // Activity Section
   Widget _buildActivitySection() {
     final activities = [
       ['Active Applications', AppAssets.jobIcon],
@@ -221,7 +240,6 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  // General Section
   Widget _buildGeneralSection(BuildContext context) {
     return Column(
       children: [
@@ -241,21 +259,21 @@ class ProfilePage extends StatelessWidget {
 
   Widget _tileItem(String title, String iconPath) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      padding: EdgeInsets.symmetric(horizontal: 16.rw, vertical: 12.rh),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
             children: [
               _iconBox(iconPath),
-              SizedBox(width: 12),
+              12.hSpace,
               Text(
                 title,
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
               ),
             ],
           ),
-          Icon(Icons.arrow_forward_ios, size: 14, color: AppColors.primary),
+          Icon(Icons.arrow_forward_ios, size: 14.rw, color: AppColors.primary),
         ],
       ),
     );
