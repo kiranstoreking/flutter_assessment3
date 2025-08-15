@@ -111,8 +111,10 @@
 // }
 
 import 'package:flutter/material.dart';
+import 'package:flutter_assignment3/core/constants/app_assets.dart';
 import 'package:flutter_assignment3/core/theme/app_colors.dart';
 import 'package:flutter_assignment3/core/theme/app_text_styles.dart';
+import 'package:flutter_assignment3/core/widgets/chips.dart';
 import 'package:flutter_assignment3/core/widgets/custom_button.dart';
 import 'package:flutter_assignment3/core/widgets/intro_appbar.dart';
 
@@ -140,22 +142,15 @@ class JobHuntingScreen extends StatelessWidget {
         onBack: onBack,
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+        padding: const EdgeInsets.all(15),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Section Title
-            Text(
-              'Current Location',
-              style: AppTextStyles.titleMedium.copyWith(
-                color: AppColors.gray700,
-              ),
-            ),
             const SizedBox(height: 12),
 
             // Current Location Card
             _locationCard(
-              icon: Icons.location_on,
               title: 'Current Location',
               subtitle: 'Find jobs in your current city',
               isSelected: true,
@@ -165,38 +160,46 @@ class JobHuntingScreen extends StatelessWidget {
             Text(
               'Add your preferred location(s)',
               style: AppTextStyles.titleMedium.copyWith(
-                color: AppColors.gray700,
+                color: AppColors.gray900,
+                fontWeight: FontWeight.w600,
               ),
             ),
             const SizedBox(height: 8),
 
             // Search Field
-            TextField(
+            TextFormField(
               decoration: InputDecoration(
                 hintText: 'Search for your favourite city...',
-                hintStyle: AppTextStyles.bodySmall.copyWith(
-                  color: AppColors.gray700,
+                hintStyle: TextStyle(color: Colors.grey.shade500, fontSize: 14),
+                prefixIcon: Container(
+                  padding: const EdgeInsets.all(
+                    12,
+                  ), // icon padding inside square
+                  child: Image.asset(AppAssets.search, height: 18, width: 18),
                 ),
                 filled: true,
-                fillColor: AppColors.white,
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 14,
-                ),
+                fillColor: Colors.white,
+                contentPadding: const EdgeInsets.all(20),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(
+                    color: Colors.grey.shade300,
+                  ), // single color
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: AppColors.gray700),
+                  borderSide: BorderSide(color: Colors.grey.shade300),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: const BorderSide(
-                    color: AppColors.primary,
-                    width: 1.5,
-                  ),
+                  borderSide: BorderSide(
+                    color: Colors.grey.shade300,
+                  ), // same as others
                 ),
+              ),
+              style: TextStyle(
+                fontSize: 14,
+                color: const Color.fromRGBO(0, 0, 0, 0.867),
               ),
             ),
 
@@ -204,12 +207,25 @@ class JobHuntingScreen extends StatelessWidget {
 
             // Preferred Locations Chips
             Wrap(
-              spacing: 8,
-              runSpacing: 8,
+              spacing: 10,
+              runSpacing: 10,
               children: [
-                _buildLocationChip('Delhi'),
-                _buildLocationChip('Bengaluru'),
-                _buildLocationChip('Mumbai'),
+                Chips(
+                  label: 'Delhi',
+                  isSelected: true,
+                  verticalPadding: 5,
+                  horizontalPadding: 5,
+                ),
+                Chips(
+                  label: 'Bengaluru',
+                  verticalPadding: 5,
+                  horizontalPadding: 5,
+                ),
+                Chips(
+                  label: 'Mumbai',
+                  verticalPadding: 5,
+                  horizontalPadding: 5,
+                ),
               ],
             ),
 
@@ -223,61 +239,113 @@ class JobHuntingScreen extends StatelessWidget {
   }
 
   Widget _locationCard({
-    required IconData icon,
     required String title,
     required String subtitle,
     bool isSelected = false,
   }) {
     return Container(
+      margin: const EdgeInsets.symmetric(vertical: 6),
       decoration: BoxDecoration(
+        // gradient: isSelected
+        //     ? const LinearGradient(
+        //         colors: [Color(0xFF001EE6), Color(0xFF031BBB)],
+        //         begin: Alignment.topLeft,
+        //         end: Alignment.bottomRight,
+        //       )
+        //     : null,
         color: isSelected
-            ? AppColors.accentBlue.withOpacity(0.1)
+            ? AppColors.accentBlue.withOpacity(0.5)
             : AppColors.white,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: isSelected ? AppColors.primary : AppColors.gray700,
+          color: isSelected ? AppColors.primary : AppColors.gray400,
+          width: 1.5,
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
-            blurRadius: 8,
-            offset: const Offset(0, 3),
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
           ),
         ],
       ),
       child: ListTile(
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        leading: Icon(icon, color: AppColors.primary),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+        leading: Container(
+          height: 50,
+          width: 50,
+          decoration: BoxDecoration(
+            // gradient: isSelected
+            //     ? LinearGradient(
+            //         colors: [
+            //           AppColors.primary.withOpacity(0.2),
+            //           Colors.white.withOpacity(0.1),
+            //         ],
+            //         begin: Alignment.topLeft,
+            //         end: Alignment.bottomRight,
+            //       )
+            //     : null,
+            color: AppColors.white,
+            borderRadius: BorderRadius.circular(14),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.08),
+                blurRadius: 6,
+                offset: const Offset(0, 3),
+              ),
+            ],
+          ),
+          child: Center(
+            child: Image.asset(
+              'assets/icons/location.png',
+              color: AppColors.secondary,
+              height: 24,
+              width: 24,
+            ),
+          ),
+        ),
         title: Text(
           title,
-          style: AppTextStyles.titleSmall.copyWith(color: AppColors.primary),
+          style: AppTextStyles.titleMedium.copyWith(
+            color: AppColors.gray800,
+            fontWeight: FontWeight.w600,
+          ),
         ),
         subtitle: Text(
           subtitle,
-          style: AppTextStyles.bodySmall.copyWith(color: AppColors.gray600),
+          style: AppTextStyles.bodyMedium.copyWith(color: AppColors.gray600),
         ),
         trailing: Icon(
           isSelected
               ? Icons.radio_button_checked
               : Icons.radio_button_unchecked,
-          color: AppColors.primary,
+          color: AppColors.secondary,
         ),
       ),
     );
   }
-
-  Widget _buildLocationChip(String city) {
-    return OutlinedButton(
-      onPressed: () {},
-      style: OutlinedButton.styleFrom(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-        side: BorderSide(color: AppColors.primary),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      ),
-      child: Text(
-        city,
-        style: AppTextStyles.bodySmall.copyWith(color: AppColors.primary),
-      ),
-    );
-  }
 }
+
+//   Widget _buildLocationChip(String city, {bool isSelected = false}) {
+//     return OutlinedButton(
+//       onPressed: () {},
+//       style: OutlinedButton.styleFrom(
+//         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+//         side: BorderSide(
+//           color: isSelected ? AppColors.secondary : AppColors.primary,
+//           width: 1.5, // border width
+//         ),
+//         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+//         backgroundColor: isSelected
+//             ? AppColors.secondaryLight
+//             : AppColors.white,
+//       ),
+//       child: Text(
+//         city,
+//         style: AppTextStyles.bodySmall.copyWith(
+//           color: isSelected ? AppColors.secondary : AppColors.primary,
+//         ),
+//       ),
+//     );
+//   }
+// }

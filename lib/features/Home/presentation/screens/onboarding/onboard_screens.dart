@@ -13,94 +13,83 @@ class IntroScreen extends StatefulWidget {
 class _IntroScreenState extends State<IntroScreen> {
   late PageController _pageController;
   int _currentPage = 0;
-  late List<Widget> slides;
 
   @override
   void initState() {
     super.initState();
     _pageController = PageController();
-
-    // Build pages dynamically
-    slides = [
-      UserInfoScreen(
-        currentPage: 0,
-        totalPages: 5,
-        onBack: () {
-          if (_currentPage > 0) {
-            _pageController.previousPage(
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.easeInOut,
-            );
-          }
-        },
-      ),
-
-      EducationalBackgroundScreen(
-        currentPage: 1,
-        totalPages: 5,
-        onBack: () {
-          if (_currentPage > 0) {
-            _pageController.previousPage(
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.easeInOut,
-            );
-          }
-        },
-      ),
-      JobHuntingScreen(
-        currentPage: 2,
-        totalPages: 5,
-        onBack: () {
-          if (_currentPage > 0) {
-            _pageController.previousPage(
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.easeInOut,
-            );
-          }
-        },
-      ),
-      SkillsScreen(
-        currentPage: 3,
-        totalPages: 5,
-        onBack: () {
-          if (_currentPage > 0) {
-            _pageController.previousPage(
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.easeInOut,
-            );
-          }
-        },
-      ),
-      WelcomeScreen(
-        userName: "LLdsld",
-        currentPage: 4,
-        totalPages: 5,
-        onBack: () {
-          if (_currentPage > 0) {
-            _pageController.previousPage(
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.easeInOut,
-            );
-          }
-        },
-      ),
-    ];
   }
+
+  void _goBack() {
+    if (_currentPage > 0) {
+      _pageController.previousPage(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    }
+  }
+
+  List<Widget> get slides => [
+    UserInfoScreen(currentPage: 0, totalPages: 5, onBack: _goBack),
+    EducationalBackgroundScreen(currentPage: 1, totalPages: 5, onBack: _goBack),
+    JobHuntingScreen(currentPage: 2, totalPages: 5, onBack: _goBack),
+    SkillsScreen(currentPage: 3, totalPages: 5, onBack: _goBack),
+    WelcomeScreen(
+      userName: "LLdsld",
+      currentPage: 4,
+      totalPages: 5,
+      onBack: _goBack,
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PageView.builder(
-        controller: _pageController,
-        itemCount: slides.length,
-        onPageChanged: (index) {
-          setState(() {
-            _currentPage = index;
-          });
-        },
-        itemBuilder: (context, index) {
-          return slides[index];
-        },
+      backgroundColor: Colors.grey[50],
+      body: Column(
+        children: [
+          Expanded(
+            child: PageView.builder(
+              controller: _pageController,
+              itemCount: slides.length,
+              onPageChanged: (index) {
+                setState(() => _currentPage = index);
+              },
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.only(
+                    left: 4,
+                    // right: 16,
+                    bottom: 4,
+                  ), // horizontal + bottom gap only
+                  child: slides[index],
+                );
+              },
+            ),
+          ),
+          // Page indicator dots
+          // Padding(
+          //   padding: const EdgeInsets.only(bottom: 16),
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.center,
+          //     children: List.generate(
+          //       slides.length,
+          //       (index) => AnimatedContainer(
+          //         duration: const Duration(milliseconds: 300),
+          //         margin: const EdgeInsets.symmetric(horizontal: 4),
+          //         height: 8,
+          //         width: _currentPage == index ? 24 : 8,
+          //         decoration: BoxDecoration(
+          //           color: _currentPage == index
+          //               ? Colors.blueAccent
+          //               : Colors.grey[400],
+          //           borderRadius: BorderRadius.circular(12),
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          // ),
+        ],
       ),
     );
   }

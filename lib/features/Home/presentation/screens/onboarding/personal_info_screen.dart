@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart'; // for formatting date
 import 'package:flutter_assignment3/core/constants/app_assets.dart';
 import 'package:flutter_assignment3/core/theme/app_colors.dart';
 import 'package:flutter_assignment3/core/theme/app_text_styles.dart';
 import 'package:flutter_assignment3/core/widgets/custom_button.dart';
 import 'package:flutter_assignment3/core/widgets/intro_appbar.dart';
 
-class UserInfoScreen extends StatelessWidget {
+class UserInfoScreen extends StatefulWidget {
   final VoidCallback? onBack;
   final int currentPage;
   final int totalPages;
-
-  static const double _screenPadding = 16.0;
-  static const double _fieldSpacing = 20.0;
-  static const double _labelSpacing = 8.0;
 
   const UserInfoScreen({
     Key? key,
@@ -21,27 +18,71 @@ class UserInfoScreen extends StatelessWidget {
     required this.totalPages,
   }) : super(key: key);
 
-  InputDecoration _inputDecoration({
-    required String label,
-    Widget? suffixIcon,
-  }) {
+  @override
+  State<UserInfoScreen> createState() => _UserInfoScreenState();
+}
+
+class _UserInfoScreenState extends State<UserInfoScreen> {
+  String? _selectedGender;
+  DateTime? _selectedDate;
+
+  InputDecoration _inputDecoration({required String hint, Widget? suffixIcon}) {
     return InputDecoration(
-      labelText: label,
-      labelStyle: AppTextStyles.titleSmall,
+      hintText: hint,
+      hintStyle: AppTextStyles.titleSmall.copyWith(color: Colors.grey),
       filled: true,
       fillColor: Colors.white,
       suffixIcon: suffixIcon,
-      contentPadding: const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
+      contentPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(color: Colors.grey.shade300),
+        borderSide: BorderSide(color: AppColors.gray400),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
-        borderSide: const BorderSide(color: AppColors.primary, width: 1.5),
+        borderSide: const BorderSide(color: AppColors.gray400, width: 1.5),
       ),
     );
+  }
+
+  Future<void> _pickDateOfBirth() async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime(2000, 1, 1),
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            dialogBackgroundColor: Colors.white,
+            colorScheme: ColorScheme.light(
+              primary: AppColors.primary, // Header background color
+              onPrimary: Colors.white, // Header text color
+              onSurface: Colors.black, // Body text color
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                foregroundColor: AppColors.primary, // Button text color
+              ),
+            ),
+          ),
+          child: Center(
+            // makes it smaller
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 350, maxHeight: 500),
+              child: child!,
+            ),
+          ),
+        );
+      },
+    );
+
+    if (picked != null) {
+      setState(() {
+        _selectedDate = picked;
+      });
+    }
   }
 
   @override
@@ -52,91 +93,75 @@ class UserInfoScreen extends StatelessWidget {
         title: "Hey there! Let's get to know you.",
         subtitle:
             "This helps us find jobs that are a perfect fit,\njust for you.",
-        currentPage: currentPage,
-        totalPages: totalPages,
-        onBack: onBack,
+        currentPage: widget.currentPage,
+        totalPages: widget.totalPages,
+        onBack: widget.onBack,
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(_screenPadding),
+      body: Padding(
+        padding: const EdgeInsets.all(15.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildCard(
+            SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _labelWithAsterisk("First Name"),
-                  const SizedBox(height: _labelSpacing),
+                  const SizedBox(height: 8),
                   TextField(
                     cursorColor: Colors.grey,
-                    decoration: _inputDecoration(
-                      label: 'Enter your first name',
-                    ),
+                    decoration: _inputDecoration(hint: 'Enter your first name'),
                   ),
-                  const SizedBox(height: _fieldSpacing),
+                  const SizedBox(height: 20),
 
                   _labelWithAsterisk("Last Name"),
-                  const SizedBox(height: _labelSpacing),
+                  const SizedBox(height: 8),
                   TextField(
                     cursorColor: Colors.grey,
-                    decoration: _inputDecoration(label: 'Enter your last name'),
+                    decoration: _inputDecoration(hint: 'Enter your last name'),
                   ),
-                  const SizedBox(height: _fieldSpacing),
+                  const SizedBox(height: 20),
 
                   _labelWithAsterisk("Gender"),
-                  const SizedBox(height: _labelSpacing),
+                  const SizedBox(height: 8),
                   Row(
                     children: [
-                      _genderOption(AppAssets.maleIcon, "Male"),
-                      _genderOption(AppAssets.femaleIcon, "Female"),
+                      _genderOption(AppAssets.femaleIcon, "Male"),
+                      _genderOption(AppAssets.maleIcon, "Female"),
                       _genderOption(AppAssets.otherIcon, "Other"),
                     ],
                   ),
-                  const SizedBox(height: _fieldSpacing),
+                  const SizedBox(height: 20),
 
                   _labelWithAsterisk("Date of Birth"),
-                  const SizedBox(height: _labelSpacing),
+                  const SizedBox(height: 8),
                   TextField(
                     cursorColor: Colors.grey,
                     readOnly: true,
+                    controller: TextEditingController(
+                      text: _selectedDate != null
+                          ? DateFormat('dd/MM/yyyy').format(_selectedDate!)
+                          : '',
+                    ),
                     decoration: _inputDecoration(
-                      label: 'Select your date of birth',
+                      hint: 'Select your date of birth',
                       suffixIcon: const Icon(
                         Icons.calendar_today,
                         color: Colors.grey,
                       ),
                     ),
-                    onTap: () {
-                      // TODO: Implement date picker
-                    },
+                    onTap: _pickDateOfBirth,
                   ),
                 ],
               ),
             ),
-            const SizedBox(height: 40),
+            // ),
+            Spacer(),
             CustomButton(text: "Let’s Begin", onPressed: () {}),
             const SizedBox(height: 30),
           ],
         ),
       ),
-    );
-  }
-
-  Widget _buildCard({required Widget child}) {
-    return Container(
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 8,
-            offset: const Offset(0, 3),
-          ),
-        ],
-      ),
-      padding: const EdgeInsets.all(_screenPadding),
-      child: child,
     );
   }
 
@@ -158,18 +183,24 @@ class UserInfoScreen extends StatelessWidget {
   }
 
   Widget _genderOption(String iconPath, String label) {
+    final bool isSelected = _selectedGender == label;
     return Expanded(
       child: GestureDetector(
         onTap: () {
-          // TODO: Handle gender selection
+          setState(() {
+            _selectedGender = label;
+          });
         },
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 4),
           padding: const EdgeInsets.symmetric(vertical: 12),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: isSelected ? AppColors.accentBlue : Colors.white,
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: Colors.grey.shade300),
+            border: Border.all(
+              color: isSelected ? AppColors.secondary : Colors.grey.shade300,
+              width: 1.5,
+            ),
           ),
           child: Column(
             children: [

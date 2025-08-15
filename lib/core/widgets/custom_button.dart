@@ -24,18 +24,20 @@ class CustomButton extends StatelessWidget {
         ),
         child: Ink(
           decoration: BoxDecoration(
-            gradient: const LinearGradient(
-              colors: [
-                Color(0xff001EE6),
-                Color(0xff031BBB),
-                Color(0xff0117AF),
-                Color(0xff00138F),
-              ], // gradient colors
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-            ),
             borderRadius: BorderRadius.circular(8),
+            gradient: const LinearGradient(
+              begin: Alignment.topCenter, // 0deg → top
+              end: Alignment.bottomCenter, // 360deg → bottom
+              colors: [
+                Color(0xFF001EE6), // #001EE6
+                Color(0xFF031BBB), // #031BBB
+                Color(0xFF0117AF), // #0117AF
+                Color(0xFF00138F), // #00138F
+              ],
+              stops: [0.0, 0.3317, 0.6587, 1.0], // corresponding stops
+            ),
           ),
+
           child: Container(
             padding: const EdgeInsets.symmetric(vertical: 14),
             alignment: Alignment.center,
@@ -44,22 +46,17 @@ class CustomButton extends StatelessWidget {
               children: [
                 Text(
                   text,
-                  style: AppTextStyles.bodyLarge.copyWith(
-                    color: AppColors.white,
-                    fontWeight: FontWeight.w600,
+                  style: AppTextStyles.displaySmall.copyWith(
+                    color: AppColors.white, // white text color
+                    fontSize: 16,
                   ),
-                  //  const TextStyle(
-                  //   fontSize: 16,
-                  //   color: Colors.white,
-                  //   fontWeight: FontWeight.w600,
-                  // ),
                 ),
-                const SizedBox(width: 8),
+                const SizedBox(width: 15),
 
                 Image.asset(
                   AppAssets.rightArrowIcon,
-                  height: 16,
-                  width: 16,
+                  height: 20,
+                  width: 20,
                   color: Colors.white, // makes icon white
                 ),
               ],

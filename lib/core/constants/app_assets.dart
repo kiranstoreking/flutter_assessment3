@@ -40,4 +40,11 @@ class AppAssets {
   static const String professionalCourse =
       '$_iconsPath/professional_course.png';
   static const String school = '$_iconsPath/school.png';
+  static const String search = '$_iconsPath/search.png';
+  static const String circle = '$_iconsPath/circle.png';
+  static const String location = '$_iconsPath/location.png';
+
+  // Animation assets
+  static const String celebrate = 'assets/animations/celebrate.json';
+  static const String celebrate1 = 'assets/animations/celebrate1.json';
 }

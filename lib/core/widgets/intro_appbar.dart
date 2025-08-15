@@ -23,7 +23,6 @@ class IntroAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
-      toolbarHeight: 220,
       backgroundColor: Colors.transparent,
       elevation: 0,
       flexibleSpace: Container(
@@ -33,37 +32,37 @@ class IntroAppBar extends StatelessWidget implements PreferredSizeWidget {
           children: [
             // Decorative background app icon
             Positioned(
-              right: -20,
-              bottom: 0,
+              right: -40,
+              bottom: -20,
               child: Opacity(
-                opacity: 0.15,
+                opacity: 0.12,
                 child: Image.asset(
                   AppAssets.appicon,
-                  height: 200,
-                  width: 200,
+                  height: 220,
+                  width: 220,
                   fit: BoxFit.contain,
                 ),
               ),
             ),
 
-            // Back button - rounded square
+            // Back button - rounded square with shadow
             if (currentPage != 0)
               Positioned(
-                top: MediaQuery.of(context).padding.top + 8,
+                top: MediaQuery.of(context).padding.top + 12,
                 left: 16,
                 child: Material(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(8),
-                  elevation: 3,
+                  borderRadius: BorderRadius.circular(12),
+                  elevation: 4,
                   child: InkWell(
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(12),
                     onTap: onBack ?? () => Navigator.pop(context),
                     child: const Padding(
-                      padding: EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(10.0),
                       child: Icon(
                         Icons.arrow_back,
-                        color: Colors.black,
-                        size: 20,
+                        color: Colors.black87,
+                        size: 22,
                       ),
                     ),
                   ),
@@ -72,9 +71,9 @@ class IntroAppBar extends StatelessWidget implements PreferredSizeWidget {
 
             // Title & Subtitle
             Positioned(
-              left: 16,
-              right: 16,
-              bottom: 24,
+              left: 20,
+              right: 20,
+              bottom: 36,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -82,18 +81,16 @@ class IntroAppBar extends StatelessWidget implements PreferredSizeWidget {
                     title,
                     style: AppTextStyles.displaySmall.copyWith(
                       color: Colors.white,
+                      height: 1.3,
                     ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
                   ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 10),
                   Text(
                     subtitle,
                     style: AppTextStyles.bodyMedium.copyWith(
                       color: Colors.white70,
+                      height: 1.4,
                     ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
                   ),
                 ],
               ),
@@ -102,12 +99,14 @@ class IntroAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
 
-      // Progress bar - only right end curved
+      // Progress bar - curved only at right end
       bottom: PreferredSize(
-        preferredSize: const Size.fromHeight(8),
+        preferredSize: const Size.fromHeight(12),
         child: Stack(
           children: [
-            Container(height: 8, color: Colors.white24),
+            // Background track
+            Container(height: 9, color: AppColors.gray400),
+            // Progress indicator
             LayoutBuilder(
               builder: (context, constraints) {
                 double progressWidth =
@@ -115,11 +114,11 @@ class IntroAppBar extends StatelessWidget implements PreferredSizeWidget {
                 return Align(
                   alignment: Alignment.centerLeft,
                   child: Container(
-                    height: 8,
+                    height: 9,
                     width: progressWidth,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: AppColors.info,
-                      borderRadius: const BorderRadius.horizontal(
+                      borderRadius: BorderRadius.horizontal(
                         right: Radius.circular(8),
                       ),
                     ),
@@ -134,5 +133,5 @@ class IntroAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(228);
+  Size get preferredSize => const Size.fromHeight(220);
 }

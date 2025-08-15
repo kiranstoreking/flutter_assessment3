@@ -20,22 +20,18 @@ class EducationalOption extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 8),
-      padding: EdgeInsets.all(8),
+      margin: EdgeInsets.symmetric(vertical: 2),
       decoration: BoxDecoration(
-        border: Border.all(
-          color: isSelected ? AppColors.accentBlue : Colors.grey.shade400,
-          width: 2,
-        ),
-        borderRadius: BorderRadius.circular(8),
-        color: isSelected ? Colors.blue.withOpacity(0.1) : Colors.white,
+        border: Border.all(color: AppColors.secondary, width: 1),
+        borderRadius: BorderRadius.circular(16),
+        color: isSelected ? AppColors.secondaryLight : Colors.white,
       ),
       child: ListTile(
         leading: Container(
           height: 50,
           width: 50,
           decoration: BoxDecoration(
-            color: AppColors.accentBlue, // light background
+            color: AppColors.secondaryLight, // light background
             borderRadius: BorderRadius.circular(8), // square with rounded edges
           ),
           child: Center(
